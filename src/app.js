@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import "dotenv/config";
 import { strings } from "./strings.js";
+import { Todo } from "./models/todo.js";
 
 // === initialisation == //
 const app = express();
@@ -10,11 +11,10 @@ app.use(bodyParser.json());
 
 // === store == //
 const todoItems = [
-  { index: 1, value: "learn react", done: false },
-  { index: 2, value: "Go shopping", done: true },
-  { index: 3, value: "buy flowers", done: true },
+  new Todo("learn react", false),
+  new Todo("Go shopping", true),
+  new Todo("buy flowers", true),
 ];
-const index = 5;
 
 // === endpoints == //
 // index endpoint
@@ -27,11 +27,7 @@ app.get("/task", (req, res) => {
 
 // create a task
 app.post("/task", (req, res) => {
-  todoItems.push({
-    index: index++,
-    value: req.body.value,
-    done: false,
-  });
+  todoItems.push(Todo.createTodo(req.body.value, false));
   return res.json({ data: todoItems, status: "success" });
 });
 
