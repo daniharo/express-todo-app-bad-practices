@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import "dotenv/config";
 
 // === initialisation == //
 const app = express();
@@ -46,4 +47,4 @@ app.patch("/task/:id", (req, res) => {
 });
 
 // === run app == //
-app.listen(8000, () => console.log(`Example app running!`));
+app.listen(process.env.LISTEN_PORT, () => console.log(`Example app running!`));
