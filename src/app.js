@@ -10,10 +10,11 @@ app.use(bodyParser.json());
 
 
 // === store == //
-const todoItems = [];
-todoItems.push({ index: 1, value: "learn react", done: false });
-todoItems.push({ index: 2, value: "Go shopping", done: true });
-todoItems.push({ index: 3, value: "buy flowers", done: true });
+const todoItems = [
+  { index: 1, value: "learn react", done: false },
+  { index: 2, value: "Go shopping", done: true },
+  { index: 3, value: "buy flowers", done: true },
+];
 const index = 5;
 
 
