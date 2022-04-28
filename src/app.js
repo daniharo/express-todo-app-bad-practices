@@ -1,13 +1,11 @@
 // === imports == //
-import express from "express"
-import bodyParser from "body-parser"
-
+import express from "express";
+import bodyParser from "body-parser";
 
 // === initialisation == //
-const app = express()
+const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 
 // === store == //
 const todoItems = [
@@ -17,37 +15,36 @@ const todoItems = [
 ];
 const index = 5;
 
-
 // === endpoints == //
 // index endpoint
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get("/", (req, res) => res.send("Hello World!"));
 
 // get all tasks
-app.get('/task', (req, res) => {
-    return res.json({ data: todoItems, status: "success" })
-})
+app.get("/task", (req, res) => {
+  return res.json({ data: todoItems, status: "success" });
+});
 
 // create a task
-app.post('/task', (req, res) => {
-    todoItems.push({
-        index: index++,
-        value: req.body.value,
-        done: false,
-    })
-    return res.json({ data: todoItems, status: 'success' })
-})
+app.post("/task", (req, res) => {
+  todoItems.push({
+    index: index++,
+    value: req.body.value,
+    done: false,
+  });
+  return res.json({ data: todoItems, status: "success" });
+});
 
 // delete a task
-app.delete('/task/:id', (req, res) => {
-    const todoItems = todoItems.filter(d => d.index != +req.params.id)
-    return res.json({ data: todoItems, status: 'success' })
-})
+app.delete("/task/:id", (req, res) => {
+  const todoItems = todoItems.filter((d) => d.index != +req.params.id);
+  return res.json({ data: todoItems, status: "success" });
+});
 
 // update a task
-app.patch('/task/:id', (req, res) => {
-    todoItems.filter(d => d.index == +req.params.id)[0].done = req.body.done
-    return res.json({ data: todoItems, status: 'success' })
-})
+app.patch("/task/:id", (req, res) => {
+  todoItems.filter((d) => d.index == +req.params.id)[0].done = req.body.done;
+  return res.json({ data: todoItems, status: "success" });
+});
 
 // === run app == //
-app.listen(8000, () => console.log(`Example app running!`))
+app.listen(8000, () => console.log(`Example app running!`));
