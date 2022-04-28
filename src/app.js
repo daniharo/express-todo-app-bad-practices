@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import "dotenv/config";
+import { strings } from "./strings.js";
 
 // === initialisation == //
 const app = express();
@@ -17,7 +18,7 @@ const index = 5;
 
 // === endpoints == //
 // index endpoint
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/", (req, res) => res.send(strings.helloWorld));
 
 // get all tasks
 app.get("/task", (req, res) => {
@@ -47,4 +48,4 @@ app.patch("/task/:id", (req, res) => {
 });
 
 // === run app == //
-app.listen(process.env.LISTEN_PORT, () => console.log(`Example app running!`));
+app.listen(process.env.LISTEN_PORT, () => console.log(strings.appStart));
