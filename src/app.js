@@ -4,6 +4,7 @@ import "dotenv/config";
 import { strings } from "./strings.js";
 import { Todo } from "./models/todo.js";
 import { todoItems } from "./store/todos.js";
+import { StatusCodes } from "http-status-codes";
 
 // === initialisation == //
 const app = express();
@@ -28,7 +29,7 @@ app.post("/task", (req, res) => {
 // delete a task
 app.delete("/task/:id", (req, res) => {
   if (isNaN(req.params.id)) {
-    res.status(404);
+    res.status(StatusCodes.BAD_REQUEST);
     return res.json({ status: strings.invalidId });
   }
   const todoItems = todoItems.filter((d) => d.index !== +req.params.id);
@@ -38,12 +39,12 @@ app.delete("/task/:id", (req, res) => {
 // update a task
 app.patch("/task/:id", (req, res) => {
   if (isNaN(req.params.id)) {
-    res.status(404);
+    res.status(StatusCodes.BAD_REQUEST);
     return res.json({ status: strings.invalidId });
   }
   const todoItem = todoItems.find((d) => d.index === +req.params.id);
   if (todoItem === undefined) {
-    res.status(404);
+    res.status(StatusCodes.NOT_FOUND);
     return res.json({ status: strings.notFound });
   }
   todoItem.done = req.body.done;
