@@ -10,11 +10,11 @@ app.use(bodyParser.json());
 
 
 // === store == //
-var todoItems = [];
+const todoItems = [];
 todoItems.push({ index: 1, value: "learn react", done: false });
 todoItems.push({ index: 2, value: "Go shopping", done: true });
 todoItems.push({ index: 3, value: "buy flowers", done: true });
-var index = 5;
+const index = 5;
 
 
 // === endpoints == //
@@ -38,7 +38,7 @@ app.post('/task', (req, res) => {
 
 // delete a task
 app.delete('/task/:id', (req, res) => {
-    var todoItems = todoItems.filter(d => d.index != +req.params.id)
+    const todoItems = todoItems.filter(d => d.index != +req.params.id)
     return res.json({ data: todoItems, status: 'success' })
 })
 
