@@ -3,18 +3,12 @@ import bodyParser from "body-parser";
 import "dotenv/config";
 import { strings } from "./strings.js";
 import { Todo } from "./models/todo.js";
+import { todoItems } from "./store/todos.js";
 
 // === initialisation == //
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// === store == //
-const todoItems = [
-  new Todo("learn react", false),
-  new Todo("Go shopping", true),
-  new Todo("buy flowers", true),
-];
 
 // === endpoints == //
 // index endpoint
