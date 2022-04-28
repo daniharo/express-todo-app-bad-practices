@@ -13,12 +13,12 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => res.send(STRINGS.HELLO_WORLD));
 
 app.get("/task", (req, res) => {
-  return res.json({ data: todoItems, status: "success" });
+  return res.json({ data: todoItems, status: STRINGS.STATUS.SUCCESS });
 });
 
 app.post("/task", (req, res) => {
   todoItems.push(Todo.createTodo(req.body.value, false));
-  return res.json({ data: todoItems, status: "success" });
+  return res.json({ data: todoItems, status: STRINGS.STATUS.SUCCESS });
 });
 
 app.delete("/task/:id", (req, res) => {
@@ -27,7 +27,7 @@ app.delete("/task/:id", (req, res) => {
     return res.json({ status: STRINGS.INVALID_ID });
   }
   const todoItems = todoItems.filter((d) => d.index !== +req.params.id);
-  return res.json({ data: todoItems, status: "success" });
+  return res.json({ data: todoItems, status: STRINGS.STATUS.SUCCESS });
 });
 
 app.patch("/task/:id", (req, res) => {
@@ -41,7 +41,7 @@ app.patch("/task/:id", (req, res) => {
     return res.json({ status: STRINGS.NOT_FOUND });
   }
   todoItem.done = req.body.done;
-  return res.json({ data: todoItems, status: "success" });
+  return res.json({ data: todoItems, status: STRINGS.STATUS.SUCCESS });
 });
 
 app.listen(process.env.LISTEN_PORT, () => console.log(STRINGS.APP_START));
