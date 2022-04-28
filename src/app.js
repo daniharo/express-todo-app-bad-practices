@@ -31,7 +31,7 @@ app.delete("/task/:id", (req, res) => {
     res.status(404);
     return res.json({ status: strings.invalidId });
   }
-  const todoItems = todoItems.filter((d) => d.index != +req.params.id);
+  const todoItems = todoItems.filter((d) => d.index !== +req.params.id);
   return res.json({ data: todoItems, status: "success" });
 });
 
@@ -41,7 +41,7 @@ app.patch("/task/:id", (req, res) => {
     res.status(404);
     return res.json({ status: strings.invalidId });
   }
-  const todoItem = todoItems.find((d) => d.index == +req.params.id);
+  const todoItem = todoItems.find((d) => d.index === +req.params.id);
   if (todoItem === undefined) {
     res.status(404);
     return res.json({ status: strings.notFound });
