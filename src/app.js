@@ -27,13 +27,26 @@ app.post("/task", (req, res) => {
 
 // delete a task
 app.delete("/task/:id", (req, res) => {
+  if (isNaN(req.params.id)) {
+    res.status(404);
+    return res.json({ status: strings.invalidId });
+  }
   const todoItems = todoItems.filter((d) => d.index != +req.params.id);
   return res.json({ data: todoItems, status: "success" });
 });
 
 // update a task
 app.patch("/task/:id", (req, res) => {
-  todoItems.filter((d) => d.index == +req.params.id)[0].done = req.body.done;
+  if (isNaN(req.params.id)) {
+    res.status(404);
+    return res.json({ status: strings.invalidId });
+  }
+  const todoItem = todoItems.find((d) => d.index == +req.params.id);
+  if (todoItem === undefined) {
+    res.status(404);
+    return res.json({ status: strings.notFound });
+  }
+  todoItem.done = req.body.done;
   return res.json({ data: todoItems, status: "success" });
 });
 
